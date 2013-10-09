@@ -1,14 +1,25 @@
 package mainTests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import com.sun.swing.internal.plaf.basic.resources.basic;
+
 
 import persistance.Admin;
+import persistance.Batiment;
 import persistance.Employee;
+import persistance.Farm;
+import persistance.Sheep;
 import services.adminServices.AdminServicesRemote;
+import services.batimentServices.BatimentServicesRemote;
 import services.employeeServices.EmployeeServicesRemote;
+import services.farmServices.FarmServicesRemote;
+import services.sheepServices.SheepServicesRemote;
 
 
 public class TestMain {
@@ -24,31 +35,71 @@ public class TestMain {
 	public static void main(String[] args) {
 		AdminServicesRemote admin = null ;
 		EmployeeServicesRemote employee = null ;
+		FarmServicesRemote farm = null ;
+		BatimentServicesRemote batiment = null ;
+		SheepServicesRemote sheep = null ;
 		try {
 			Context context = new InitialContext();
 			Object a =context.lookup("ejb:/SheepFarmingManagment/AdminServices!services.adminServices.AdminServicesRemote");
 			//Object u =context.lookup("ejb:/SheepFarmingManagment/UserServices!services.userServices.UserServicesRemote");
 			Object e =context.lookup("ejb:/SheepFarmingManagment/EmployeeServices!services.employeeServices.EmployeeServicesRemote");
+			Object s =context.lookup("ejb:/SheepFarmingManagment/SheepServices!services.sheepServices.SheepServicesRemote");
+			Object b =context.lookup("ejb:/SheepFarmingManagment/BatimentServices!services.batimentServices.BatimentServicesRemote");
+			Object f =context.lookup("ejb:/SheepFarmingManagment/FarmServices!services.farmServices.FarmServicesRemote");
+
 			admin = (AdminServicesRemote) a ;
 			employee = (EmployeeServicesRemote) e ;
+			farm = (FarmServicesRemote) f ;
+			sheep = (SheepServicesRemote) s ;
+			batiment = (BatimentServicesRemote) b ;
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		createAdmin(admin);
-		createEmployee(employee);
+		
+		
+
+	 //   Farm f1 = new Farm(0, "FarmaVille", "Nabeul");
+	    Farm f1 = new Farm();
+	    f1= farm.findFarmById(1);
+		System.out.println(f1.toString());
+		
+		Batiment b1 = new Batiment("batiment1");
+		Batiment b2 = new Batiment("batiment2");
+		List<Batiment> batiments = new ArrayList<Batiment>();
+		batiments.add(b1);
+		batiments.add(b2);
+
+		//f1.BatimentToFarm(batiments);
+
+		//System.out.println(f1.getBatiments().toString());
+		farm.createFarm(f1,batiments);
+/*	
+	Employee emp1 = new Employee("omar", null, null, null, null, null, null, null, null);
+	Employee emp2 = new  Employee("ala", null, null, null, null, null, null, null, null);
+	List<Employee> emp = new ArrayList<Employee>();
+	emp.add(emp1);
+	emp.add(emp2);
+	Batiment b = new Batiment();
+
+	b= batiment.findBatimentById(1);
+	b.EmployeeToBatiment(emp);
+	batiment.createBatiment(b);*/
+	//	Batiment bb = new Batiment();
+/*	List<Employee> empb = new ArrayList<Employee>();
+	empb.add(emp2);
+	bb= batiment.findBatimentById(1);
+	System.out.println(bb.toString());
+	b.EmployeeToBatiment(empb);
+	batiment.createBatiment(bb); */
+	
+		
+	/*	
+		Sheep sh = new Sheep(0, 04, "arabi", "male", null, null, null, "A-", null, null, 0, 0, null, 0, 0, "happy sheep");
+		sh.setBatiment(b1);
+		sheep.createSheep(sh);
+	*/	
 
 	}
 
-	public static void createAdmin(AdminServicesRemote admin) {
-		//User usr = new User(0, "Alaeddine", "Messadi", "root", "root", "alaeddine.messadi@esprit.tn", 0, "Tazarka");
-		Admin ad = new Admin("Alaeddine", "Messadi", "root", "root", "alaeddine.messadi@esprit.tn","00998877", "Tazarka");
-		admin.createAdmin(ad);
-	}
-	public static void createEmployee(EmployeeServicesRemote employee) { 
-		//User usr = new User(0, "Alaeddine", "Messadi", "root", "root", "alaeddine.messadi@esprit.tn", 0, "Tazarka");
-		Employee emp = new Employee("Omar", "BenRhuma", "farmer", "farmer", "omar.benrhouma@esprit.tn","33224433", "Tunis","Farmer","66554433",null);
-		employee.createEmployee(emp);
-
-	}
 }
