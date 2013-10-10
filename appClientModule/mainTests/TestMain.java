@@ -9,6 +9,9 @@ import javax.naming.NamingException;
 
 import com.sun.swing.internal.plaf.basic.resources.basic;
 
+import delegate.AdminServiceDelegate;
+import delegate.UserServiceDelegate;
+
 
 import persistance.Admin;
 import persistance.Batiment;
@@ -32,7 +35,7 @@ public class TestMain {
 	 * @param args
 	 */
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		AdminServicesRemote admin = null ;
 		EmployeeServicesRemote employee = null ;
 		FarmServicesRemote farm = null ;
@@ -59,30 +62,37 @@ public class TestMain {
 		
 		
 
-	 //   Farm f1 = new Farm(0, "FarmaVille", "Nabeul");
-	    Farm f1 = new Farm();
+/*  //	   Farm f1 = new Farm(0, "FarmaVille", "Nabeul");
+       farm.createFarm(f1);
+ 	  	 Farm f1 = new Farm(); 
 	    f1= farm.findFarmById(1);
-		System.out.println(f1.toString());
+	//	System.out.println(f1.toString());
 		
 		Batiment b1 = new Batiment("batiment1");
 		Batiment b2 = new Batiment("batiment2");
 		List<Batiment> batiments = new ArrayList<Batiment>();
 		batiments.add(b1);
 		batiments.add(b2);
-
+*/
 		//f1.BatimentToFarm(batiments);
 
 		//System.out.println(f1.getBatiments().toString());
-		farm.createFarm(f1,batiments);
-/*	
-	Employee emp1 = new Employee("omar", null, null, null, null, null, null, null, null);
-	Employee emp2 = new  Employee("ala", null, null, null, null, null, null, null, null);
-	List<Employee> emp = new ArrayList<Employee>();
+	//	farm.createFarm(f1,batiments);
+
+//	Employee emp1 = new Employee("aza", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
+	Admin ad1 = new Admin("ee", "ee", "ee", "ee", "ee", "ee", "ee");
+//	Employee emp2 = new  Employee("ala", null, null, null, null, null, null, null, null);
+	
+//		employee.createEmployee(emp1);
+	AdminServiceDelegate.createAdmin(ad1);
+//		admin.createAdmin(ad1);
+/*	List<Employee> emp = new ArrayList<Employee>();
 	emp.add(emp1);
 	emp.add(emp2);
-	Batiment b = new Batiment();
-
-	b= batiment.findBatimentById(1);
+	
+	Batiment b = batiment.findBatimentById(1);
+	batiment.EmployeeToBatiment(b, emp);
+ //   b= batiment.findBatimentById(1);
 	b.EmployeeToBatiment(emp);
 	batiment.createBatiment(b);*/
 	//	Batiment bb = new Batiment();
