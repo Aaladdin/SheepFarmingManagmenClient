@@ -68,9 +68,9 @@ public class TestMain {
 	    f1= farm.findFarmById(1);
 	//	System.out.println(f1.toString());
 		
-		Batiment b1 = new Batiment("batiment1");
-		Batiment b2 = new Batiment("batiment2");
-		List<Batiment> batiments = new ArrayList<Batiment>();
+		BatimentServiceDelegate b1 = new BatimentServiceDelegate("batiment1");
+		BatimentServiceDelegate b2 = new BatimentServiceDelegate("batiment2");
+		List<BatimentServiceDelegate> batiments = new ArrayList<BatimentServiceDelegate>();
 		batiments.add(b1);
 		batiments.add(b2);
 */
@@ -90,12 +90,12 @@ public class TestMain {
 	emp.add(emp1);
 	emp.add(emp2);
 	
-	Batiment b = batiment.findBatimentById(1);
+	BatimentServiceDelegate b = batiment.findBatimentById(1);
 	batiment.EmployeeToBatiment(b, emp);
  //   b= batiment.findBatimentById(1);
 	b.EmployeeToBatiment(emp);
 	batiment.createBatiment(b);*/
-	//	Batiment bb = new Batiment();
+	//	BatimentServiceDelegate bb = new BatimentServiceDelegate();
 /*	List<Employee> empb = new ArrayList<Employee>();
 	empb.add(emp2);
 	bb= batiment.findBatimentById(1);

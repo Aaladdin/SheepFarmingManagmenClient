@@ -16,27 +16,19 @@ public class AdminServiceDelegate {
 	public static void createAdmin(Admin admin) {
 		getProxyAdmin().createAdmin(admin);	
 	}
-	@Override
-	public void updateAdmin(Admin admin) {
-		ad.merge(admin);
+	public static void updateAdmin(Admin admin) {
+		getProxyAdmin().updateAdmin(admin);
 		
 	}
-
-	@Override
-	public void deleteAdmin(Admin admin) {
-		ad.remove(ad.merge(admin));
-		
+	public static void deleteAdmin(Admin admin) {
+		getProxyAdmin().deleteAdmin(admin);	
 	}
-
-	@Override
-	public Admin findAdminById(int idAdmin) {
+	public static Admin findAdminById(int idAdmin) {
 		
-		return ad.find(Admin.class, idAdmin);
+		return getProxyAdmin().findAdminById(idAdmin);
 	}
-
-	@Override
-	public List<Admin> getAdmin() {
+	public static List<Admin> getAdmin() {
 		
-		return ad.createQuery("From Admin",Admin.class).getResultList();
+		return getProxyAdmin().getAdmin();
 	}
 }
