@@ -56,6 +56,6 @@ public class AdministratorHomeGUI extends JFrame {
 		
 		this.var = admin ;
 		label.setText(admin.getLogin());
-		System.out.println("admin"+admin.getIdUser());
+
 	}
 }
