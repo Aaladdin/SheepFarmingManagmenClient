@@ -87,10 +87,21 @@ public class AuthenticationGUI extends JFrame {
 		
 		contentPane.setLayout(null);
 		
+		JLabel lblUserName = new JLabel("User Name :");
+		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblUserName.setBackground(Color.GREEN);
+		lblUserName.setBounds(236, 147, 89, 42);
+		contentPane.add(lblUserName);
+		
+		JLabel lblPassword = new JLabel("Password   :");
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPassword.setBounds(236, 219, 89, 50);
+		contentPane.add(lblPassword);
+		
 		JLabel lblCreateFarm = new JLabel("AUTHENTICATION");
-		lblCreateFarm.setForeground(UIManager.getColor("Button.focus"));
-		lblCreateFarm.setFont(new Font("SketchFlow Print", Font.ITALIC, 26));
-		lblCreateFarm.setBounds(246, 43, 242, 50);
+		lblCreateFarm.setForeground(new Color(0, 128, 128));
+		lblCreateFarm.setFont(new Font("Stencil", Font.ITALIC, 29));
+		lblCreateFarm.setBounds(236, 43, 262, 50);
 		contentPane.add(lblCreateFarm);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -102,81 +113,54 @@ public class AuthenticationGUI extends JFrame {
 		btnCancel.setBounds(490, 346, 89, 23);
 		contentPane.add(btnCancel);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "wellcome", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBackground(SystemColor.controlHighlight);
-		panel.setBounds(186, 104, 362, 212);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblUserName = new JLabel("User Name :");
-		lblUserName.setBounds(32, 54, 73, 14);
-		panel.add(lblUserName);
-		
-		JLabel lblPassword = new JLabel("Password   :");
-		lblPassword.setBounds(32, 130, 61, 14);
-		panel.add(lblPassword);
-		
-		textField = new JTextField();
-		textField.setBounds(161, 51, 122, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(161, 127, 122, 20);
-		panel.add(passwordField);
-		
-		final JLabel notification = new JLabel("");
-		notification.setBounds(10, 187, 310, 14);
-		panel.add(notification);
-		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-		 	@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-	
-		 		
-		       if(textField.getText().isEmpty()){ notification.setText("User name missed ...");  }
-		     else if (passwordField.getText().isEmpty()) {	notification.setText("Password missed ..."); } 
-		       else{
-		    	  
-		    	   UserServicesRemote userServicesRemote = null ;
-		    	   try {
-					Context context =  new InitialContext();
-					userServicesRemote = (UserServicesRemote) context.lookup("ejb:/SheepFarmingManagment/UserServices!services.userServices.UserServicesRemote");
-					
-					User user = new User();
-					Admin admin = new Admin() ;
-					Employee employee = new Employee();
-					System.out.println("tt");
-					user = UserServiceDelegate.authenticate(textField.getText(), passwordField.getText().toString());
-					
-					
-	                if(user == null){System.out.println("user not found");}
-	                else if(user.getClass().equals(employee.getClass())){
-	                	employee = (Employee) UserServiceDelegate.findUserById(user.getIdUser());
-	                	EmployeeHomeGUI employeegui = new EmployeeHomeGUI(employee);
-	                	employeegui.setVisible(true);
-	                }else {
-	                  admin = (Admin) UserServiceDelegate.findUserById(user.getIdUser());
-                      AdministratorHomeGUI admingui = new AdministratorHomeGUI(admin);
-                      admingui.setVisible(true);
-	                }
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    	  
-		       }
-			   }
-		}); 
+		
 		btnLogin.setBounds(136, 346, 89, 23);
 		contentPane.add(btnLogin);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(AuthenticationGUI.class.getResource("/images/sheepauth.jpg")));
 		label.setBackground(Color.WHITE);
-		label.setBounds(-14, 11, 271, 388);
+		label.setBounds(-70, 11, 319, 388);
 		contentPane.add(label);
+		
+		textField = new JTextField();
+		textField.setBounds(370, 158, 122, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(370, 234, 122, 20);
+		contentPane.add(passwordField);
+		
+		final JLabel notification = new JLabel("");
+		notification.setForeground(new Color(220, 20, 60));
+		notification.setBounds(490, 289, 140, 14);
+		contentPane.add(notification);
+		btnLogin.addActionListener(new ActionListener() {
+		 	@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+		       if(textField.getText().isEmpty()){ notification.setText("*User name missed ...");  }
+		     else if (passwordField.getText().isEmpty()) {	notification.setText("*Password missed ..."); } 
+		       else{
+		    	   User user = new User();
+				   Admin admin = new Admin() ;
+				   Employee employee = new Employee();
+				   user = UserServiceDelegate.authenticate(textField.getText(), passwordField.getText().toString());	
+				if(user.getClass().equals(employee.getClass())){
+					employee = (Employee) UserServiceDelegate.findUserById(user.getIdUser());
+					EmployeeHomeGUI employeegui = new EmployeeHomeGUI(employee);
+					employeegui.setVisible(true);
+				}else if(user.getClass().equals(admin.getClass())){
+				  admin = (Admin) UserServiceDelegate.findUserById(user.getIdUser());
+				  AdministratorHomeGUI admingui = new AdministratorHomeGUI(admin);
+				  admingui.setVisible(true);
+				}else{
+					notification.setText("*user not found");
+				}
+		    	  
+		       }
+			   }
+		}); 
 	}
 }

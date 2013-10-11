@@ -53,9 +53,11 @@ public class AdministratorHomeGUI extends JFrame {
 		JLabel label = new JLabel("");
 		label.setBounds(138, 45, 164, 37);
 		contentPane.add(label);
-		
-		this.var = admin ;
-		label.setText(admin.getLogin());
+		if(admin != null){
+			this.var = admin ;
+			label.setText(admin.getLogin());			
+		}
+
 
 	}
 }
