@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import com.sun.swing.internal.plaf.basic.resources.basic;
 
 import delegate.AdminServiceDelegate;
+import delegate.EmployeeServiceDelegate;
 import delegate.UserServiceDelegate;
 
 
@@ -18,6 +19,7 @@ import persistance.Batiment;
 import persistance.Employee;
 import persistance.Farm;
 import persistance.Sheep;
+import persistance.User;
 import services.adminServices.AdminServicesRemote;
 import services.batimentServices.BatimentServicesRemote;
 import services.employeeServices.EmployeeServicesRemote;
@@ -41,25 +43,7 @@ public class TestMain {
 		FarmServicesRemote farm = null ;
 		BatimentServicesRemote batiment = null ;
 		SheepServicesRemote sheep = null ;
-		try {
-			Context context = new InitialContext();
-			Object a =context.lookup("ejb:/SheepFarmingManagment/AdminServices!services.adminServices.AdminServicesRemote");
-			//Object u =context.lookup("ejb:/SheepFarmingManagment/UserServices!services.userServices.UserServicesRemote");
-			Object e =context.lookup("ejb:/SheepFarmingManagment/EmployeeServices!services.employeeServices.EmployeeServicesRemote");
-			Object s =context.lookup("ejb:/SheepFarmingManagment/SheepServices!services.sheepServices.SheepServicesRemote");
-			Object b =context.lookup("ejb:/SheepFarmingManagment/BatimentServices!services.batimentServices.BatimentServicesRemote");
-			Object f =context.lookup("ejb:/SheepFarmingManagment/FarmServices!services.farmServices.FarmServicesRemote");
 
-			admin = (AdminServicesRemote) a ;
-			employee = (EmployeeServicesRemote) e ;
-			farm = (FarmServicesRemote) f ;
-			sheep = (SheepServicesRemote) s ;
-			batiment = (BatimentServicesRemote) b ;
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		
 
 /*  //	   Farm f1 = new Farm(0, "FarmaVille", "Nabeul");
@@ -78,12 +62,12 @@ public class TestMain {
 
 		//System.out.println(f1.getBatiments().toString());
 	//	farm.createFarm(f1,batiments);
-
+//   User usr = new User(0, "zez", "zez", "zez", "zez", "zez", "zez", "zz");
 //	Employee emp1 = new Employee("aza", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 	Admin ad1 = new Admin("ee", "ee", "ee", "ee", "ee", "ee", "ee");
 //	Employee emp2 = new  Employee("ala", null, null, null, null, null, null, null, null);
-	
-//		employee.createEmployee(emp1);
+//	   EmployeeServiceDelegate.createEmployee(emp1);
+//     UserServiceDelegate.createUser(usr);
 	AdminServiceDelegate.createAdmin(ad1);
 //		admin.createAdmin(ad1);
 /*	List<Employee> emp = new ArrayList<Employee>();

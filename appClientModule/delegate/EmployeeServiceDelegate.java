@@ -8,24 +8,24 @@ import services.employeeServices.EmployeeServicesRemote;
 
 public class EmployeeServiceDelegate {
 
-	private static final String jndiNameEmployee = "ejb:/esprit-ejb/UserService!edu.app.services.UserServiceRemote";
+	private static final String jndiNameEmployee = "ejb:/SheepFarmingManagment/EmployeeServices!services.employeeServices.EmployeeServicesRemote";
 	
 	private static EmployeeServicesRemote getProxyEmployee(){
 		return (EmployeeServicesRemote)ServiceLocator.getInstance().getProxy(jndiNameEmployee);
 	}
-	public void createEmployee(Employee employee) {
+	public static void createEmployee(Employee employee) {
 		getProxyEmployee().createEmployee(employee);
 	}
-	public void updateEmployee(Employee employee) {
+	public static void updateEmployee(Employee employee) {
 		getProxyEmployee().updateEmployee(employee);	
 	}
-	public void deleteEmployee(Employee employee) {
+	public static void deleteEmployee(Employee employee) {
 		getProxyEmployee().deleteEmployee(employee);	
 	}
-	public Employee findEmployeeById(int idEmployee) {
+	public static Employee findEmployeeById(int idEmployee) {
 		return getProxyEmployee().findEmployeeById(idEmployee);
 	}
-	public List<Employee> getEmployee() {
+	public static List<Employee> getEmployee() {
 		
 		return getProxyEmployee().getEmployee();
 	}

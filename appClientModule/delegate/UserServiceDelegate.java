@@ -14,6 +14,7 @@ public class UserServiceDelegate{
 	private static UserServicesRemote getProxyUser(){
 		return (UserServicesRemote)ServiceLocator.getInstance().getProxy(jndiNameUser);
 	}
+	
 	public static void createUser(User user) {
 		getProxyUser().createUser(user);	
 	}

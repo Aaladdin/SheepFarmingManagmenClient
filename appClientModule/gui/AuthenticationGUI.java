@@ -4,7 +4,6 @@ package gui;
 import java.awt.EventQueue;
 
 
-import javax.management.Notification;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,10 +22,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
+import delegate.UserServiceDelegate;
+
 import persistance.Admin;
 import persistance.Employee;
 import persistance.User;
-import services.employeeServices.EmployeeServicesRemote;
 import services.userServices.UserServicesRemote;
 
 import java.awt.Toolkit;
@@ -130,11 +130,6 @@ public class AuthenticationGUI extends JFrame {
 		notification.setBounds(10, 187, 310, 14);
 		panel.add(notification);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(AuthenticationGUI.class.getResource("/images/farmheader2.jpg")));
-		label_1.setBounds(-145, -23, 606, 272);
-		panel.add(label_1);
-		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 		 	@SuppressWarnings("deprecation")
@@ -149,19 +144,21 @@ public class AuthenticationGUI extends JFrame {
 		    	   try {
 					Context context =  new InitialContext();
 					userServicesRemote = (UserServicesRemote) context.lookup("ejb:/SheepFarmingManagment/UserServices!services.userServices.UserServicesRemote");
+					
 					User user = new User();
 					Admin admin = new Admin() ;
 					Employee employee = new Employee();
-					user = userServicesRemote.authenticate(textField.getText(), passwordField.getText());
+					System.out.println("tt");
+					user = UserServiceDelegate.authenticate(textField.getText(), passwordField.getText().toString());
 					
 					
 	                if(user == null){System.out.println("user not found");}
 	                else if(user.getClass().equals(employee.getClass())){
-	                	employee = (Employee) userServicesRemote.findUserById(user.getIdUser());
+	                	employee = (Employee) UserServiceDelegate.findUserById(user.getIdUser());
 	                	EmployeeHomeGUI employeegui = new EmployeeHomeGUI(employee);
 	                	employeegui.setVisible(true);
 	                }else {
-	                  admin = (Admin) userServicesRemote.findUserById(user.getIdUser());
+	                  admin = (Admin) UserServiceDelegate.findUserById(user.getIdUser());
                       AdministratorHomeGUI admingui = new AdministratorHomeGUI(admin);
                       admingui.setVisible(true);
 	                }
