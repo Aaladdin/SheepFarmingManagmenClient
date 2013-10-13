@@ -17,6 +17,9 @@ import gui.AuthenticationGUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
 /**
  *
  * @author DELL
@@ -26,6 +29,12 @@ public class Principal extends javax.swing.JFrame {
     /** Creates new form Principal */
     public Principal() {
         initComponents();
+        JFrame.setDefaultLookAndFeelDecorated(true);
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
         new Thread(){
             public void run(){
                 for (int i=0;i<101;i++){
@@ -55,8 +64,8 @@ public class Principal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+        private void initComponents() {
+    	this.setUndecorated(true);
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
