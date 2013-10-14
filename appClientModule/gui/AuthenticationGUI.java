@@ -87,7 +87,7 @@ public class AuthenticationGUI extends JFrame {
 		
 				final JLabel notification = new JLabel("");
 				notification.setForeground(new Color(220, 20, 60));
-				notification.setBounds(440, 286, 140, 14);
+				notification.setBounds(286, 280, 160, 96);
 				contentPane.add(notification);
 
 		JLabel lblUserName = new JLabel("User Name :");
@@ -165,6 +165,8 @@ public class AuthenticationGUI extends JFrame {
 						setVisible(false);
 					} else {
 						notification.setText("* user not found");
+						notification.setIcon(new ImageIcon(AuthenticationGUI.class.getResource("/images/error.gif")));
+						//
 					}
 
 				}
