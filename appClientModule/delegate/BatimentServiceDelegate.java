@@ -33,7 +33,7 @@ public class BatimentServiceDelegate {
 	public static void EmployeeToBatiment(Batiment batiment, List<Employee> employees) {
         getProxyBatiment().EmployeeToBatiment(batiment, employees);
 	}
-	public void SheepToBatiment(Batiment batiment, List<Sheep> sheeps) {
+	public static void SheepToBatiment(Batiment batiment, List<Sheep> sheeps) {
 		getProxyBatiment().SheepToBatiment(batiment, sheeps);
 		}
 		

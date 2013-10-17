@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,9 +9,6 @@ import javax.swing.border.EmptyBorder;
 import persistance.Admin;
 import java.awt.Toolkit;
 import java.awt.Color;
-import java.awt.Canvas;
-import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -78,10 +74,10 @@ public class AdministratorHomeGUI extends JFrame {
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("My Profil", null, tabbedPane_1, null);
 		
-		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Sheeps", new ImageIcon(AdministratorHomeGUI.class.getResource("/images/eating_grass.gif")), tabbedPane_2, null);
-		
 		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Employees", new ImageIcon(AdministratorHomeGUI.class.getResource("/images/error.gif")), tabbedPane_3, null);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Sheeps", new ImageIcon(AdministratorHomeGUI.class.getResource("/images/eating_grass.gif")), tabbedPane_2, null);
 	}
 }
